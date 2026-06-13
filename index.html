@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kudd Network</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<base target="_blank">
+</head>
+<body>
+    <!-- Canvas Background -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Scanline Overlay -->
+    <div class="scanlines"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-bracket">[</span>
+                <span class="glitch" data-text="KUDD">KUDD</span>
+                <span class="logo-bracket">]</span>
+                <span class="logo-network">NETWORK</span>
+            </div>
+            <div class="status-bar">
+                <span class="status-dot"></span>
+                <span class="status-text">ONLINE</span>
+                <span class="divider">|</span>
+                <span id="clock" class="clock">00:00:00</span>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="terminal-box">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="t-btn red"></span>
+                        <span class="t-btn yellow"></span>
+                        <span class="t-btn green"></span>
+                    </div>
+                    <span class="terminal-title">kudd@network:~</span>
+                </div>
+                <div class="terminal-body">
+                    <p class="line"><span class="prompt">$</span> <span class="command">whoami</span></p>
+                    <p class="line output">Kudd — Developer & Network Architect</p>
+                    <p class="line"><span class="prompt">$</span> <span class="command">cat contact.info</span></p>
+                    <p class="line output">Connecting to the grid...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Links Section -->
+        <section class="links-section">
+            <h2 class="section-title">
+                <span class="title-icon">⟩</span>
+                <span class="typing-text">CONNECT_TO_GRID</span>
+                <span class="cursor">_</span>
+            </h2>
+
+            <div class="links-grid" id="linksGrid">
+                <!-- Links loaded from Supabase -->
+                <div class="link-card skeleton">
+                    <div class="link-icon">◈</div>
+                    <div class="link-info">
+                        <div class="link-platform">Loading...</div>
+                        <div class="link-username">---</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kudd Only Section -->
+        <section class="kudd-only-section">
+            <div class="kudd-only-border">
+                <button class="kudd-only-btn" id="kuddOnlyBtn">
+                    <span class="btn-icon">🔒</span>
+                    <span class="btn-text">KUDD ONLY</span>
+                    <span class="btn-glow"></span>
+                </button>
+            </div>
+            <p class="kudd-hint">Restricted area. Authorized personnel only.</p>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-line"></div>
+            <p class="footer-text">kuddnetwork.vercel.app // v2.0.26 // SECURE CONNECTION</p>
+        </footer>
+    </div>
+
+    <!-- Kudd Only Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title">◈ AUTHENTICATION REQUIRED</span>
+                <button class="modal-close" id="modalClose">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="auth-icon">🔐</div>
+                <p class="auth-text">Enter access code to enter private sector.</p>
+                <div class="input-group">
+                    <input type="password" id="accessCode" class="code-input" placeholder="ENTER_CODE_" maxlength="20" autocomplete="off">
+                    <div class="input-underline"></div>
+                </div>
+                <div class="auth-status" id="authStatus"></div>
+                <button class="verify-btn" id="verifyBtn">
+                    <span class="btn-label">VERIFY</span>
+                    <span class="btn-loader"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Private Panel -->
+    <div class="private-panel" id="privatePanel">
+        <div class="panel-overlay" id="panelOverlay">
+            <div class="panel-container">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        <span class="panel-icon">◉</span>
+                        <span>PRIVATE SECTOR</span>
+                    </div>
+                    <button class="panel-close" id="panelClose">×</button>
+                </div>
+                <div class="panel-body" id="panelBody">
+                    <div class="panel-loading">
+                        <div class="spinner"></div>
+                        <p>Decrypting secure data...</p>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <span class="session-id">Session: <span id="sessionId">---</span></span>
+                    <button class="logout-btn" id="logoutBtn">TERMINATE SESSION</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
